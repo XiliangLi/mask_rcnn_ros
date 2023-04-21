@@ -35,6 +35,32 @@ from distutils.version import LooseVersion
 assert LooseVersion(tf.__version__) >= LooseVersion("1.3")
 assert LooseVersion(keras.__version__) >= LooseVersion('2.0.8')
 
+# os.environ['CUDA_VISIBLE_DEVICES'] = '/gpu:0,1'
+
+# Allow GPU Growth
+from keras.backend.tensorflow_backend import set_session
+import tensorflow as tf
+
+# config = tf.compat.v1.ConfigProto(gpu_options=tf.compat.v1.GPUOptions(allow_growth=True))
+# sess = tf.compat.v1.Session(config=config)
+# tf.compat.v1.Session()
+
+gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.3)
+sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+
+
+# tfconfig = tf.compat.v1.ConfigProto(allow_soft_placement=True)
+# gpu_options = tf.compat.v1.GPUOptions(per_process_gpu_memory_fraction=0.7)
+
+# tfconfig.gpu_options.per_process_gpu_memory_fraction=0.7
+# tfconfig.gpu_options.allow_growth = True
+# tfconfig.log_device_placement = False
+# sess = tf.Session(config=tfconfig)
+# set_session(sess)
+
+
+
+
 
 ############################################################
 #  Utility Functions
